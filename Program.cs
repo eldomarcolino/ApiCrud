@@ -1,5 +1,16 @@
+using ApiCrud.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var connetionMysql = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(
+        connetionMysql,
+        new MySqlServerVersion(new Version(8, 1, 0)) //Versão do MySQL
+        )
+    );
 // Add services to the container.
 
 builder.Services.AddControllers();
