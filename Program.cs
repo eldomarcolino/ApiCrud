@@ -1,3 +1,4 @@
+using ApiCrud.Business;
 using ApiCrud.Context;
 using ApiCrud.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 
 //Registrar repositório
-builder.Services.AddScoped<IEstudantesRepository, EstudantesRepository>();
+builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
+builder.Services.AddScoped<IStudentsBusiness, StudentsBusiness>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

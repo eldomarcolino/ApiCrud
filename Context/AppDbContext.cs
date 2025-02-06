@@ -9,11 +9,11 @@ namespace ApiCrud.Context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         // Definir as tabelas como DbSet
-        public DbSet<Estudantes> Estudantes { get; set; }
+        public DbSet<Students> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Estudantes>().HasIndex(x => x.Email).IsUnique();
+            modelBuilder.Entity<Students>().HasIndex(x => x.Email).IsUnique();
             base.OnModelCreating(modelBuilder);
         }
     }

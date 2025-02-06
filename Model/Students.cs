@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ApiCrud.Model
 {
     [Table("Students")]
-    public class Estudantes
+    public class Students
     {
         [Key]
         public int Id { get; set; }
