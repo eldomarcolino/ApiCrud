@@ -14,6 +14,6 @@ namespace ApiCrud.Model
         [StringLength(50)]
         public string Name { get; set; }
 
-        public virtual ICollection<Students> Students { get; set; }
+        public virtual ICollection<Students> Students { get; set; } = new List<Students>();
     }
 }

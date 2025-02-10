@@ -1,6 +1,5 @@
 ﻿using ApiCrud.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
 namespace ApiCrud.Context
 {

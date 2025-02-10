@@ -38,6 +38,7 @@ namespace ApiCrud.Model
         //Chave estrangeira para o curso
         public int CursoId { get; set; }
         //Propriedade de naveçaão para o curso do aluno
+        [JsonIgnore]
         [ForeignKey("CursoId")]
         public virtual Curso Curso { get; set; }
     }
