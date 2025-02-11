@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ApiCrud.Migrations
+namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250205232922_tabela_estudantes")]
-    partial class tabela_estudantes
+    [Migration("20250211024312_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,25 @@ namespace ApiCrud.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("ApiCrud.Model.Estudantes", b =>
+            modelBuilder.Entity("ApiCrud.Model.Curso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Course");
+                });
+
+            modelBuilder.Entity("ApiCrud.Model.Students", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,38 +54,57 @@ namespace ApiCrud.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("Course")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("Create_date")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime>("Update_date")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CursoId");
+
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("RegistrationNumber")
+                        .IsUnique();
+
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("ApiCrud.Model.Students", b =>
+                {
+                    b.HasOne("ApiCrud.Model.Curso", "Curso")
+                        .WithMany("Students")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+                });
+
+            modelBuilder.Entity("ApiCrud.Model.Curso", b =>
+                {
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

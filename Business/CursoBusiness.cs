@@ -23,9 +23,19 @@ namespace ApiCrud.Business
             return await _cursoRepository.GetCursoByIdAsync(id);
         }
 
-        public async Task CreateCursoAsync(Curso curso)
+        public async Task<Curso> CreateCursoAsync(Curso curso)
         {
-            _cursoRepository.CreateCursoAsync(curso);
+            if (curso.Id == 0 || curso.Id == null)
+            {
+                // Obter o último ID registrado e incrementar
+                int lastId = await _cursoRepository.GetLastIdAsync();
+                curso.Id = lastId + 1;
+            }
+
+            // Criar o curso no repositório
+            await _cursoRepository.CreateCursoAsync(curso);
+
+            return curso;
         }
 
         public async Task UpdateCursoAsync(Curso curso)

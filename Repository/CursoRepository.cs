@@ -45,5 +45,17 @@ namespace ApiCrud.Repository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<int> GetLastIdAsync()
+        {
+            // Verificar se a tabela está vazia
+            if (!await _context.Curso.AnyAsync())
+            {
+                return 0;
+            }
+
+            // Encontrar o maior ID existente no banco de dados
+            return await _context.Curso.MaxAsync(x => x.Id);
+        }
     }
 }

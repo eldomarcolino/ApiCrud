@@ -7,4 +7,5 @@ public interface ICursoRepository
     Task CreateCursoAsync(Curso curso);
     Task UpdateCursoAsync(Curso curso);
     Task DeleteCursoAsync(int id);
+    Task<int> GetLastIdAsync();
 }

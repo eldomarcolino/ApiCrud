@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiCrud.Model
 {
@@ -14,6 +15,7 @@ namespace ApiCrud.Model
         [StringLength(50)]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Students> Students { get; set; } = new List<Students>();
     }
 }

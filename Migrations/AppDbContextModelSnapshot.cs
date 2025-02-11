@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ApiCrud.Migrations
+namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -49,13 +49,7 @@ namespace ApiCrud.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Balance")
-                        .HasMaxLength(255)
                         .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Course")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime>("Create_date")
                         .HasColumnType("datetime(6)");

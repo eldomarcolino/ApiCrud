@@ -20,16 +20,11 @@ namespace ApiCrud.Model
         public string RegistrationNumber { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Course { get; set; }
-
-        [Required]
         [StringLength(100)]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(255)]
         public decimal Balance { get; set; }
 
         public DateTime Create_date { get; set; }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SistemaDeRecarga.Controllers
 {
     [ApiController]
-    [Route("Cursos[controller]")]
+    [Route("api/[controller]")]
     public class CursoController : ControllerBase
     {
         private readonly ICursoBusiness _cursoBusiness;
@@ -47,7 +47,7 @@ namespace SistemaDeRecarga.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStudentAsync(int id, Curso curso)
+        public async Task<IActionResult> UpdateCursoAsync(int id, Curso curso)
         {
             if (id != curso.Id)
             {
