@@ -8,4 +8,5 @@ public interface ICursoRepository
     Task UpdateCursoAsync(Curso curso);
     Task DeleteCursoAsync(int id);
     Task<int> GetLastIdAsync();
+    Task<bool> CursoExistAsync(string name);
 }

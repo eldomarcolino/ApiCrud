@@ -18,6 +18,8 @@ namespace ApiCrud.Context
                 .HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<Students>()
                 .HasIndex(x => x.RegistrationNumber).IsUnique();
+            modelBuilder.Entity<Curso>()
+                .HasIndex(x => x.Name).IsUnique();
 
 
             //Configuração de relacionamento

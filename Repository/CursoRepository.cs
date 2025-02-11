@@ -57,5 +57,10 @@ namespace ApiCrud.Repository
             // Encontrar o maior ID existente no banco de dados
             return await _context.Curso.MaxAsync(x => x.Id);
         }
+
+        public async Task<bool> CursoExistAsync(string name) //Verifica a existencia de um curso no banco
+        {
+            return await _context.Curso.AnyAsync(x => x.Name == name);
+        }
     }
 }

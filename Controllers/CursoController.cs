@@ -32,17 +32,25 @@ namespace SistemaDeRecarga.Controllers
             return Ok(cursos);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateCursoAsync(Curso curso)
+        [HttpPost("CreateCurso")]
+        public async Task<IActionResult> CreateCursoAsync([FromBody]Curso curso)
         {
             try
             {
                 await _cursoBusiness.CreateCursoAsync(curso);
-                return CreatedAtAction(nameof(GetCursoByIdAsync), new { id = curso.Id }, curso);
+
+                var sucessResponse = new
+                {
+                    Success = true,
+                    Message = "Curso Criado com sucesso",
+                    Data = curso
+                };
+
+                return StatusCode(StatusCodes.Status201Created, sucessResponse);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Message = ex.Message});
             }
         }
 
@@ -65,7 +73,7 @@ namespace SistemaDeRecarga.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCurso")]
         public async Task<IActionResult> DeleteCursoAsync(int id)
         {
             try

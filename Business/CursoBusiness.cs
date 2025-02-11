@@ -1,4 +1,5 @@
-﻿using ApiCrud.Model;
+﻿using ApiCrud.Context;
+using ApiCrud.Model;
 using ApiCrud.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,14 +26,17 @@ namespace ApiCrud.Business
 
         public async Task<Curso> CreateCursoAsync(Curso curso)
         {
+            if (await _cursoRepository.CursoExistAsync(curso.Name))
+            {
+                throw new Exception("Já existe um curso com este nome");
+            }
+
             if (curso.Id == 0 || curso.Id == null)
             {
-                // Obter o último ID registrado e incrementar
                 int lastId = await _cursoRepository.GetLastIdAsync();
                 curso.Id = lastId + 1;
             }
 
-            // Criar o curso no repositório
             await _cursoRepository.CreateCursoAsync(curso);
 
             return curso;
