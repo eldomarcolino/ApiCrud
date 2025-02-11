@@ -8,4 +8,3 @@ public interface IStudentsRepository
     Task UpdateStudentAsync(Students estudante);
     Task DeleteStudentAsync(int id);
 }
-
