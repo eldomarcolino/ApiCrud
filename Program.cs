@@ -18,6 +18,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //Registrar repositório
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IStudentsBusiness, StudentsBusiness>();
+builder.Services.AddScoped<ICursoRepository, CursoRepository>();
+builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
