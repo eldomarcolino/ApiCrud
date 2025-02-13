@@ -1,8 +1,8 @@
-﻿using ApiCrud.Context;
-using ApiCrud.Model;
+﻿using SistemaDeRecarga.Context;
+using SistemaDeRecarga.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiCrud.Repository
+namespace SistemaDeRecarga.Repository
 {
     public class CursoRepository : ICursoRepository
     {

@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
-namespace ApiCrud.Model
+namespace SistemaDeRecarga.Model
 {
-    [Table("Students")]
-    public class Students
+    public class Estudantes
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -30,11 +27,9 @@ namespace ApiCrud.Model
         public DateTime Create_date { get; set; }
         public DateTime Update_date { get; set; }
 
-        //Chave estrangeira para o curso
         public int CursoId { get; set; }
-        //Propriedade de naveçaão para o curso do aluno
-        [JsonIgnore]
-        [ForeignKey("CursoId")]
-        public virtual Curso Curso { get; set; }
+
+        //[ForeignKey("CursoId")]
+       // public Curso Curso { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using ApiCrud.Context;
-using ApiCrud.Model;
-using ApiCrud.Repository;
+﻿using SistemaDeRecarga.Context;
+using SistemaDeRecarga.Model;
+using SistemaDeRecarga.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiCrud.Business
+namespace SistemaDeRecarga.Business
 {
     public class CursoBusiness : ICursoBusiness
     {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250211024312_Initial")]
-    partial class Initial
+    [Migration("20250211231809_FixCursoIdName")]
+    partial class FixCursoIdName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace SistemaDeRecarga.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Course");
                 });

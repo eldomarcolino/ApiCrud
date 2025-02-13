@@ -1,4 +1,4 @@
-﻿using ApiCrud.Model;
+﻿using SistemaDeRecarga.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaDeRecarga.Controllers

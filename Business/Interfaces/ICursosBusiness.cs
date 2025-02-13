@@ -1,4 +1,4 @@
-﻿using ApiCrud.Model;
+﻿using SistemaDeRecarga.Model;
 
 public interface ICursoBusiness
 {

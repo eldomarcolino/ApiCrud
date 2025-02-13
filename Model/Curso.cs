@@ -2,13 +2,12 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace ApiCrud.Model
+namespace SistemaDeRecarga.Model
 {
     [Table("Course")]
     public class Curso
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -16,6 +15,6 @@ namespace ApiCrud.Model
         public string Name { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Students> Students { get; set; } = new List<Students>();
+        public ICollection<Estudantes> Estudantes { get; set; } = new List<Estudantes>();
     }
 }

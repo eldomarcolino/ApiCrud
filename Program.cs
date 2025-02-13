@@ -1,6 +1,6 @@
-using ApiCrud.Business;
-using ApiCrud.Context;
-using ApiCrud.Repository;
+using SistemaDeRecarga.Business;
+using SistemaDeRecarga.Context;
+using SistemaDeRecarga.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 
 //Registrar repositório
-builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
-builder.Services.AddScoped<IStudentsBusiness, StudentsBusiness>();
+builder.Services.AddScoped<IEstudantesRepository, EstudantesRepository>();
+builder.Services.AddScoped<IEstudantesBusiness, EstudantesBusiness>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
 
