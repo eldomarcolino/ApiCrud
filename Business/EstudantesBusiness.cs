@@ -1,4 +1,5 @@
 ﻿using SistemaDeRecarga.Model;
+using SistemaDeRecarga.Repository;
 
 namespace SistemaDeRecarga.Business
 {
@@ -23,6 +24,17 @@ namespace SistemaDeRecarga.Business
 
         public async Task CreateEstudantesAsync(Estudantes estudante)
         {
+            if (await _estudantesRepository.EmailAndRegistrationNumberExistAsync(estudante.Email, estudante.RegistrationNumber))
+            {
+                throw new Exception("Este email ou esta matrícula já foi registrada");
+            }
+
+            if (estudante.Id == 0 || estudante.Id == null)
+            {
+                int lastId = await _estudantesRepository.GetLastIdAsync();
+                estudante.Id = lastId + 1;
+            }
+
             await _estudantesRepository.CreateEstudantesAsync(estudante);
         }
 
