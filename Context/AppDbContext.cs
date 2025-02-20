@@ -10,6 +10,7 @@ namespace SistemaDeRecarga.Context
         // Definir as tabelas como DbSet
         public DbSet<Estudantes> Estudantes { get; set; }
         public DbSet<Curso> Curso { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
