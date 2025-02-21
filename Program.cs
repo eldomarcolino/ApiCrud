@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SistemaDeRecarga.Auth;
 using SistemaDeRecarga.Business;
 using SistemaDeRecarga.Context;
 using SistemaDeRecarga.Repository;
@@ -31,6 +32,8 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
+
+builder.Services.AddScoped<TokenService>();
 
 //String de conexão
 var connetionMysql = builder.Configuration.GetConnectionString("DefaultConnection");
