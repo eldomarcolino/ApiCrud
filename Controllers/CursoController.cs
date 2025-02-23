@@ -1,10 +1,12 @@
 ﻿using SistemaDeRecarga.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemaDeRecarga.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CursoController : ControllerBase
     {
         private readonly ICursoBusiness _cursoBusiness;
