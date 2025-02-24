@@ -12,8 +12,8 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250213195121_coluna")]
-    partial class coluna
+    [Migration("20250224031048_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,15 +94,51 @@ namespace SistemaDeRecarga.Migrations
                     b.ToTable("Estudantes");
                 });
 
+            modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Createdate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("SistemaDeRecarga.Model.Estudantes", b =>
                 {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", "Curso")
+                    b.HasOne("SistemaDeRecarga.Model.Curso", null)
                         .WithMany("Estudantes")
                         .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>

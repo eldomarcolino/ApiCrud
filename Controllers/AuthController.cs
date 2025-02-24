@@ -19,7 +19,7 @@ namespace SistemaDeRecarga.Controllers
         public IActionResult Login([FromBody] User user)
         {
             // Simulação de autenticação (substituir por uma lógica real)
-            if (user.UserName == "admin" && user.Password == "admin123")
+            if (user.Username == "admin" && user.Password == "admin123")
             {
                 var token = _tokenService.GenerateToken(user);
                 return Ok(new { token });

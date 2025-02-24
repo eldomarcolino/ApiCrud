@@ -15,6 +15,8 @@ namespace SistemaDeRecarga.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configuração de índices únicos
+            modelBuilder.Entity<User>()
+                .HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<Estudantes>()
                 .HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<Estudantes>()
