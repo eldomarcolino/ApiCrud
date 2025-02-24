@@ -52,5 +52,10 @@ namespace SistemaDeRecarga.Repository
             // Encontrar o maior ID existente no banco de dados
             return await _context.User.MaxAsync(x => x.Id);
         }
+
+        public async Task<bool> EmailAndRegistrationNumberExistAsync(string email, string matricula) //Verifica a existencia de um email ou matrícula no banco
+        {
+            return await _context.Estudantes.AnyAsync(x => x.Email == email || x.RegistrationNumber == matricula);
+        }
     }
 }

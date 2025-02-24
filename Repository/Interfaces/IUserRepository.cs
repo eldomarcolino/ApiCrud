@@ -7,4 +7,5 @@ public interface IUserRepository
     Task UpdateUserAsync(User user);
     Task DeleteUserAsync(int id);
     Task<int> GetLastIdAsync();
+    Task<bool> EmailAndRegistrationNumberExistAsync(string email, string matricula);
 }
