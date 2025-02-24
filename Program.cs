@@ -52,6 +52,7 @@ builder.Services.AddScoped<IEstudantesRepository, EstudantesRepository>();
 builder.Services.AddScoped<IEstudantesBusiness, EstudantesBusiness>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
