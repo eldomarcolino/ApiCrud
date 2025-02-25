@@ -3,7 +3,7 @@ using SistemaDeRecarga.Repository;
 
 namespace SistemaDeRecarga.Business
 {
-    public class UserBusiness : IUserBusines
+    public class UserBusiness : IUserBusiness
     {
         private readonly IUserRepository _userRepository;
 

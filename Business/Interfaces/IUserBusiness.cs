@@ -1,6 +1,6 @@
 ﻿using SistemaDeRecarga.Model;
 
-public interface IUserBusines
+public interface IUserBusiness
 {
     Task<IEnumerable<User>> GetAllUserAsync();
     Task<User> CreateUserAsync(User user);
