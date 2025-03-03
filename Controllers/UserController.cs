@@ -21,7 +21,7 @@ namespace SistemaDeRecarga.Controllers
         public async Task<IActionResult> GetAllUserAsync()
         {
             var users = await _userBusiness.GetAllUserAsync();
-            return Ok(User);
+            return Ok(users);
         }
 
         [HttpPost("CreateUser")]

@@ -55,7 +55,7 @@ namespace SistemaDeRecarga.Repository
 
         public async Task<bool> EmailAndRegistrationNumberExistAsync(string email, string matricula) //Verifica a existencia de um email ou matrícula no banco
         {
-            return await _context.Estudantes.AnyAsync(x => x.Email == email || x.RegistrationNumber == matricula);
+            return await _context.User.AnyAsync(x => x.Email == email || x.RegistrationNumber == matricula);
         }
     }
 }
