@@ -24,6 +24,9 @@ namespace SistemaDeRecarga.Business
                 throw new Exception("Este email ou esta matrícula já foi registrada");
             }
 
+            //Criptografar a senha
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             if (user.Id == 0 || user.Id == null)
             {
                 int lastId = await _userRepository.GetLastIdAsync();
@@ -37,6 +40,21 @@ namespace SistemaDeRecarga.Business
 
         public async Task UpdateUserAsync(User user)
         {
+            var existingUser = await _userRepository.GetUserByIdAsync(user.Id);
+            if (existingUser == null)
+            {
+                throw new Exception("Usuário não encontrado.");
+            }
+
+            if (!string.IsNullOrEmpty(user.Password) && user.Password != existingUser.Password)
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            }
+            else
+            {
+                user.Password = existingUser.Password;
+            }
+
             _userRepository.UpdateUserAsync(user);
         }
 
@@ -44,5 +62,7 @@ namespace SistemaDeRecarga.Business
         {
             await _userRepository.DeleteUserAsync(id);
         }
+
+
     }
 }

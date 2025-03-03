@@ -21,6 +21,17 @@ namespace SistemaDeRecarga.Controllers
         public async Task<IActionResult> GetAllUserAsync()
         {
             var users = await _userBusiness.GetAllUserAsync();
+
+            var userDto = users.Select(u => new UserDTO
+            {
+                Id = u.Id,
+                Username = u.Username,
+                Email = u.Email,
+                RegistrationNumber = u.RegistrationNumber,
+                Role = u.Role,
+                Createdate = u.Createdate
+            });
+
             return Ok(users);
         }
 

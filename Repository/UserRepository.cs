@@ -18,6 +18,16 @@ namespace SistemaDeRecarga.Repository
             return await _context.User.ToListAsync();
         }
 
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _context.User.FindAsync(id);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
         public async Task CreateUserAsync(User user)
         {
             await _context.User.AddAsync(user);
