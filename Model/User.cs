@@ -38,4 +38,14 @@ namespace SistemaDeRecarga.Model
         public string Role { get; set; }
         public DateTime Createdate { get; set; }
     }
+
+    public class LoginRequest
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+    }
 }

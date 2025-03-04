@@ -6,4 +6,6 @@ public interface IUserBusiness
     Task<User> CreateUserAsync(User user);
     Task UpdateUserAsync(User user);
     Task DeleteUserAsync(int id);
+    Task<bool> VerifyUserPasswordAsync(string email, string password);
+    Task<User> AuthenticateAsync(string email, string password);
 }

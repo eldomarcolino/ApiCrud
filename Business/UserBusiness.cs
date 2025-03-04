@@ -63,6 +63,32 @@ namespace SistemaDeRecarga.Business
             await _userRepository.DeleteUserAsync(id);
         }
 
+        public async Task<bool> VerifyUserPasswordAsync(string email, string password)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+            if (user == null)
+            {
+                return false;
+            }
 
+            return BCrypt.Net.BCrypt.Verify(password, user.Password);
+        }
+
+        public async Task<User> AuthenticateAsync(string email, string password)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+            if (user == null)
+            {
+                return null;
+            }
+
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            if (!isPasswordValid)
+            {
+                return null;
+            }
+
+            return user;
+        }
     }
 }
