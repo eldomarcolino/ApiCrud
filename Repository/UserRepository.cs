@@ -67,5 +67,10 @@ namespace SistemaDeRecarga.Repository
         {
             return await _context.User.AnyAsync(x => x.Email == email || x.RegistrationNumber == matricula);
         }
+
+        public async Task<bool> HasUserAsync()
+        {
+            return await _context.User.AnyAsync();
+        }
     }
 }

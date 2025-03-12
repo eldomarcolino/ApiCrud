@@ -20,12 +20,35 @@ namespace SistemaDeRecarga.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            // Simulação de autenticação (substituir por uma lógica real)
-            //if (loginRequest.Email == "admin@sistema.com" && loginRequest.Password == "admin123")
-            //{
-            //    var tokem = _tokenService.GenerateToken(loginRequest);
-            //    return Ok(new { tokem });
-            //}
+
+            //verifica se há usuários cadastrados
+            var userExist = await _userBusiness.HasUserAsync();
+
+            if (!userExist && loginRequest.Email == "admin@uea.edu.br" && loginRequest.Password == "admin123")
+            {
+                var adminUser = new User
+                {
+                    Id = 0,
+                    Username = "admin",
+                    Email = "admin@uea.edu.br",
+                    Password = "admin123",
+                    Role = "Admin"
+                };
+
+                var userToken = _tokenService.GenerateToken(adminUser);
+
+                return Ok(new
+                {
+                    userToken,
+                    user = new
+                    {
+                        id = adminUser.Id,
+                        username = adminUser.Username,
+                        email = adminUser.Email,
+                        role = adminUser.Role
+                    }
+                });
+            }
 
             var user = await _userBusiness.AuthenticateAsync(loginRequest.Email, loginRequest.Password);
             if (user == null)

@@ -10,4 +10,5 @@ public interface IUserRepository
     Task DeleteUserAsync(int id);
     Task<int> GetLastIdAsync();
     Task<bool> EmailAndRegistrationNumberExistAsync(string email, string matricula);
+    Task<bool> HasUserAsync();
 }

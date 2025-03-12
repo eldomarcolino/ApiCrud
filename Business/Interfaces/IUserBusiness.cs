@@ -8,4 +8,5 @@ public interface IUserBusiness
     Task DeleteUserAsync(int id);
     Task<bool> VerifyUserPasswordAsync(string email, string password);
     Task<User> AuthenticateAsync(string email, string password);
+    Task<bool> HasUserAsync();
 }

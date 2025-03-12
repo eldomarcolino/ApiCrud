@@ -90,5 +90,10 @@ namespace SistemaDeRecarga.Business
 
             return user;
         }
+
+        public async Task<bool> HasUserAsync()
+        {
+           return await _userRepository.HasUserAsync();
+        }
     }
 }
