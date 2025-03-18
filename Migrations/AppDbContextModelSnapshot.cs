@@ -54,17 +54,13 @@ namespace SistemaDeRecarga.Migrations
                     b.Property<DateTime>("Createdate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("CursoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
                     b.Property<int>("IdCourse")
-                        .HasColumnType("int")
-                        .HasColumnName("IdCourse");
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -87,10 +83,10 @@ namespace SistemaDeRecarga.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
-
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("IdCourse");
 
                     b.HasIndex("RegistrationNumber")
                         .IsUnique();
@@ -100,9 +96,13 @@ namespace SistemaDeRecarga.Migrations
 
             modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
                 {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", null)
+                    b.HasOne("SistemaDeRecarga.Model.Curso", "IdCourseNavigation")
                         .WithMany("Users")
-                        .HasForeignKey("CursoId");
+                        .HasForeignKey("IdCourse")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdCourseNavigation");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>

@@ -10,8 +10,7 @@ namespace SistemaDeRecarga.Model
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Curso")]
-        [Column("IdCourse")]
+        [ForeignKey("IdCourse")]
         public int IdCourse { get; set; }
 
         [MaxLength(100)]
@@ -31,8 +30,9 @@ namespace SistemaDeRecarga.Model
 
         public DateTime Createdate { get; set; }
 
- //       [JsonIgnore]
- //       public Curso Curso { get; set; }
+        [JsonIgnore]
+        [ForeignKey("IdCourse")]
+        public Curso? IdCourseNavigation { get; set; }  //descomentar apenas para fazer nova migration
     }
 
     public class UserDTO

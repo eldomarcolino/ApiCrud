@@ -22,14 +22,13 @@ namespace SistemaDeRecarga.Context
                 .HasIndex(x => x.Name).IsUnique();
 
 
- //           //Configuração de relacionamento
+            //Configuração de relacionamento
 
 
-//            modelBuilder.Entity<User>()
-//                .HasOne(u => u.Curso)
-//                .WithMany(c => c.Users)
-//                .HasForeignKey(u => u.IdCourse)
-//                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.IdCourseNavigation)
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.IdCourse);
 
 
 

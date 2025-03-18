@@ -12,8 +12,8 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250318015634_semEstudantes")]
-    partial class semEstudantes
+    [Migration("20250318234225_AjusteIdCourse")]
+    partial class AjusteIdCourse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,9 @@ namespace SistemaDeRecarga.Migrations
                     b.Property<DateTime>("Createdate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int?>("CursoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -86,10 +89,10 @@ namespace SistemaDeRecarga.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CursoId");
+
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("IdCourse");
 
                     b.HasIndex("RegistrationNumber")
                         .IsUnique();
@@ -99,13 +102,9 @@ namespace SistemaDeRecarga.Migrations
 
             modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
                 {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", "Curso")
+                    b.HasOne("SistemaDeRecarga.Model.Curso", null)
                         .WithMany("Users")
-                        .HasForeignKey("IdCourse")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
+                        .HasForeignKey("CursoId");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>

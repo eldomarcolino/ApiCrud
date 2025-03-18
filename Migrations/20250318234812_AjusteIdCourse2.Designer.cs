@@ -12,8 +12,8 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250318014713_chave-estrangeira")]
-    partial class chaveestrangeira
+    [Migration("20250318234812_AjusteIdCourse2")]
+    partial class AjusteIdCourse2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,54 +44,6 @@ namespace SistemaDeRecarga.Migrations
                         .IsUnique();
 
                     b.ToTable("Course");
-                });
-
-            modelBuilder.Entity("SistemaDeRecarga.Model.Estudantes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("Create_date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("RegistrationNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<DateTime>("Update_date")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("RegistrationNumber")
-                        .IsUnique();
-
-                    b.ToTable("Estudantes");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
@@ -145,30 +97,19 @@ namespace SistemaDeRecarga.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("SistemaDeRecarga.Model.Estudantes", b =>
-                {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", null)
-                        .WithMany("Estudantes")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
                 {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", "Curso")
+                    b.HasOne("SistemaDeRecarga.Model.Curso", "IdCourseNavigation")
                         .WithMany("Users")
                         .HasForeignKey("IdCourse")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Curso");
+                    b.Navigation("IdCourseNavigation");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>
                 {
-                    b.Navigation("Estudantes");
-
                     b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
