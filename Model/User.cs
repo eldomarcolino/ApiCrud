@@ -10,11 +10,13 @@ namespace SistemaDeRecarga.Model
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("Curso")]
+        [Column("IdCourse")]
+        public int IdCourse { get; set; }
+
         [MaxLength(100)]
         public string Username { get; set; }
 
-
-        [JsonIgnore]
         [MaxLength(255)]
         public string Password { get; set; }
 
@@ -26,7 +28,11 @@ namespace SistemaDeRecarga.Model
         public string RegistrationNumber { get; set; }
 
         public string Role { get; set; }
+
         public DateTime Createdate { get; set; }
+
+ //       [JsonIgnore]
+ //       public Curso Curso { get; set; }
     }
 
     public class UserDTO

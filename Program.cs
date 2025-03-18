@@ -48,8 +48,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 
 //Registrar repositório
-builder.Services.AddScoped<IEstudantesRepository, EstudantesRepository>();
-builder.Services.AddScoped<IEstudantesBusiness, EstudantesBusiness>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

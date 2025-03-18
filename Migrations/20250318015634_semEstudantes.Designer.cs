@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaDeRecarga.Context;
 
@@ -11,9 +12,11 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250318015634_semEstudantes")]
+    partial class semEstudantes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,17 +57,13 @@ namespace SistemaDeRecarga.Migrations
                     b.Property<DateTime>("Createdate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("CursoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
                     b.Property<int>("IdCourse")
-                        .HasColumnType("int")
-                        .HasColumnName("IdCourse");
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -87,10 +86,10 @@ namespace SistemaDeRecarga.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
-
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("IdCourse");
 
                     b.HasIndex("RegistrationNumber")
                         .IsUnique();
@@ -100,9 +99,13 @@ namespace SistemaDeRecarga.Migrations
 
             modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
                 {
-                    b.HasOne("SistemaDeRecarga.Model.Curso", null)
+                    b.HasOne("SistemaDeRecarga.Model.Curso", "Curso")
                         .WithMany("Users")
-                        .HasForeignKey("CursoId");
+                        .HasForeignKey("IdCourse")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>

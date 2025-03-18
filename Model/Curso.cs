@@ -15,6 +15,6 @@ namespace SistemaDeRecarga.Model
         public string Name { get; set; }
 
         [JsonIgnore]
-        public ICollection<Estudantes> Estudantes { get; set; } = new List<Estudantes>();
+        public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
 }

@@ -12,8 +12,8 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250224031048_Initial")]
-    partial class Initial
+    [Migration("20250317205928_inicio")]
+    partial class inicio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,10 +110,18 @@ namespace SistemaDeRecarga.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+                    b.Property<int>("IdCourse")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -127,6 +135,9 @@ namespace SistemaDeRecarga.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("RegistrationNumber")
                         .IsUnique();
 
                     b.ToTable("User");

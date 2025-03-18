@@ -12,8 +12,8 @@ using SistemaDeRecarga.Context;
 namespace SistemaDeRecarga.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250224230353_RegistrationNumber")]
-    partial class RegistrationNumber
+    [Migration("20250318014713_chave-estrangeira")]
+    partial class chaveestrangeira
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,9 @@ namespace SistemaDeRecarga.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+                    b.Property<int>("IdCourse")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -134,6 +137,8 @@ namespace SistemaDeRecarga.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("IdCourse");
+
                     b.HasIndex("RegistrationNumber")
                         .IsUnique();
 
@@ -149,9 +154,22 @@ namespace SistemaDeRecarga.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SistemaDeRecarga.Model.User", b =>
+                {
+                    b.HasOne("SistemaDeRecarga.Model.Curso", "Curso")
+                        .WithMany("Users")
+                        .HasForeignKey("IdCourse")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+                });
+
             modelBuilder.Entity("SistemaDeRecarga.Model.Curso", b =>
                 {
                     b.Navigation("Estudantes");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
