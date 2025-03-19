@@ -12,9 +12,9 @@ namespace SistemaDeRecarga.Business
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> GetAllUserAsync()
+        public async Task<IEnumerable<User>> GetAllUserFilterAsync(int? id = null, int? idCourse = null, string username = null, string role = null)
         {
-            return await _userRepository.GetAllUserAsync();
+            return await _userRepository.GetAllUserFilterAsync(id, idCourse, username, role);
         }
 
         public async Task<User> CreateUserAsync(User user)

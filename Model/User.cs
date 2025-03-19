@@ -38,6 +38,7 @@ namespace SistemaDeRecarga.Model
     public class UserDTO
     {
         public int Id { get; set; }
+        public int IdCourse { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string RegistrationNumber { get; set; }

@@ -2,7 +2,7 @@
 
 public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllUserAsync();
+    Task<IEnumerable<User>> GetAllUserFilterAsync(int? id = null, int? idCourse = null, string username = null, string role = null);
     Task<User> GetUserByIdAsync(int id);
     Task<User> GetUserByEmailAsync(string email);
     Task CreateUserAsync(User user);
