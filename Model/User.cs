@@ -32,7 +32,10 @@ namespace SistemaDeRecarga.Model
 
         [JsonIgnore]
         [ForeignKey("IdCourse")]
-        public Curso? IdCourseNavigation { get; set; }  //descomentar apenas para fazer nova migration
+        public Curso? IdCourseNavigation { get; set; }
+
+        [JsonIgnore]
+        public Balance? Balance { get; set; }
     }
 
     public class UserDTO
