@@ -11,6 +11,7 @@ namespace SistemaDeRecarga.Context
         public DbSet<Curso> Curso { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Balance> Balance { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,7 +27,7 @@ namespace SistemaDeRecarga.Context
                 .HasIndex(x => x.Name).IsUnique();
 
 
-            //Configuração de relacionamento
+            //Configuração de relacionamentos
 
 
             modelBuilder.Entity<User>()
@@ -34,10 +35,15 @@ namespace SistemaDeRecarga.Context
                 .WithMany(c => c.Users)
                 .HasForeignKey(u => u.IdCourse);
 
-            modelBuilder.Entity<Balance>()
+            modelBuilder.Entity<Balance>() //Configuraçao para Salso
                 .HasOne(u => u.User)
                 .WithOne(b => b.Balance)
                 .HasForeignKey<Balance>(b => b.IdUser);
+
+            modelBuilder.Entity<Transaction>() // Configuraçao para Transiçao
+                .HasOne(t => t.User)
+                .WithMany(u => u.Transaction)
+                .HasForeignKey(t => t.IdUser);
 
 
 

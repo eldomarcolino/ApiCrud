@@ -36,6 +36,9 @@ namespace SistemaDeRecarga.Model
 
         [JsonIgnore]
         public Balance? Balance { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Transaction> Transaction { get; set; } = new List<Transaction>();
     }
 
     public class UserDTO
