@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SistemaDeRecarga.Model;
 
 namespace SistemaDeRecarga.Controllers
 {
@@ -15,7 +16,7 @@ namespace SistemaDeRecarga.Controllers
             _balanceBusiness = balanceBusiness;
         }
 
-        [HttpGet("usuario/{iduser}")]
+        [HttpGet("usuario/{idUser}")]
         public async Task<IActionResult> GetBalanceByIdUserAsync(int idUser)
         {
             try
@@ -33,12 +34,12 @@ namespace SistemaDeRecarga.Controllers
         }
 
 
-        [HttpGet("recarregar")]
-        public async Task<IActionResult> AddBalanceAsync([FromBody] int idUser, decimal valor)
+        [HttpPost("recarregar")]
+        public async Task<IActionResult> AddBalanceAsync([FromBody] AddBalanceRequest request)
         {
             try
             {
-                var balance = await _balanceBusiness.AddBalanceAsync(idUser, valor);
+                var balance = await _balanceBusiness.AddBalanceAsync(request.IdUser, request.Amount);
 
                 var successResponse = new
                 {
@@ -53,8 +54,28 @@ namespace SistemaDeRecarga.Controllers
             {
                 return BadRequest(new { Success = false, Message = ex.Message });
             }
-        }  
-        
+        }
 
+        [HttpPost("debitar")]
+        public async Task<IActionResult> DeductBalanceAsync([FromBody] AddBalanceRequest request)
+        {
+            try
+            {
+                var balance = await _balanceBusiness.DeductBalanceAsync(request.IdUser, request.Amount);
+
+                var successResponse = new
+                {
+                    Success = true,
+                    Message = "Compra realizada com sucesso.",
+                    Balance = balance
+                };
+
+                return StatusCode(StatusCodes.Status201Created, successResponse);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Success = false, Message = ex.Message });
+            }
+        }
     }
 }

@@ -6,17 +6,19 @@ namespace SistemaDeRecarga.Business
     public class BalanceBusiness : IBalanceBusiness
     {
         private readonly IBalanceRepository _balanceRepository;
+        private readonly IUserRepository _userRepository;
 
-        public BalanceBusiness(IBalanceRepository balanceRepository)
+        public BalanceBusiness(IBalanceRepository balanceRepository, IUserRepository userRepository)
         {
             _balanceRepository = balanceRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<Balance> GetBalanceByIdUserAsync(int idUser)
         {
 
             //Verificar se usuário existe
-            var user = await _balanceRepository.GetBalanceByIdUserAsync(idUser);
+            var user = await _userRepository.GetUserByIdAsync(idUser);
             if (user == null)
             {
                 throw new Exception("Usuário não encontrado");
@@ -35,7 +37,7 @@ namespace SistemaDeRecarga.Business
                 await _balanceRepository.CreateBalanceAsync(balance);
             }
 
-            return user;
+            return balance;
         }
 
         public async Task<Balance> AddBalanceAsync(int idUser, decimal valor)

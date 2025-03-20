@@ -21,4 +21,10 @@ namespace SistemaDeRecarga.Model
         [JsonIgnore]
         public User? User { get; set; }
     }
+
+    public class AddBalanceRequest
+    {
+        public int IdUser { set; get; }
+        public decimal Amount { get; set; }
+    }
 }

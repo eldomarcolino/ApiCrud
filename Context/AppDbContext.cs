@@ -19,6 +19,9 @@ namespace SistemaDeRecarga.Context
                 .HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<User>()
                 .HasIndex(x => x.RegistrationNumber).IsUnique();
+
+
+
             modelBuilder.Entity<Curso>()
                 .HasIndex(x => x.Name).IsUnique();
 
@@ -31,6 +34,10 @@ namespace SistemaDeRecarga.Context
                 .WithMany(c => c.Users)
                 .HasForeignKey(u => u.IdCourse);
 
+            modelBuilder.Entity<Balance>()
+                .HasOne(u => u.User)
+                .WithOne(b => b.Balance)
+                .HasForeignKey<Balance>(b => b.IdUser);
 
 
 
