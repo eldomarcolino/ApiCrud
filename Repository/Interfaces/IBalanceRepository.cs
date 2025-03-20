@@ -2,7 +2,7 @@
 
 public interface IBalanceRepository
 {
-    Task<Balance> GetBalanceByUserIdAsync(int idUser);
+    Task<Balance> GetBalanceByIdUserAsync(int idUser);
     Task CreateBalanceAsync(Balance balance);
     Task UpdateBalanceAsync(Balance balance);
 }

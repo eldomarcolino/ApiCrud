@@ -13,7 +13,7 @@ namespace SistemaDeRecarga.Repository
             _context = context;
         }
 
-        public async Task<Balance> GetBalanceByUserIdAsync(int idUser)
+        public async Task<Balance> GetBalanceByIdUserAsync(int idUser)
         {
             return await _context.Balance.FirstOrDefaultAsync(b => b.IdUser == idUser);
         }
