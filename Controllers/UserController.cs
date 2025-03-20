@@ -43,14 +43,14 @@ namespace SistemaDeRecarga.Controllers
             {
                 await _userBusiness.CreateUserAsync(user);
 
-                var sucessResponse = new
+                var successResponse = new
                 {
                     Success = true,
                     Message = "Usuário criado com sucesso",
                     Data = user
                 };
 
-                return StatusCode(StatusCodes.Status201Created, sucessResponse);
+                return StatusCode(StatusCodes.Status201Created, successResponse);
             }
             catch (Exception ex)
             {

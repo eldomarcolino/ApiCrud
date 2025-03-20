@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SistemaDeRecarga.Business
 {
-    public class BalanceBusiness
+    public class BalanceBusiness : IBalanceBusiness
     {
         private readonly IBalanceRepository _balanceRepository;
 
