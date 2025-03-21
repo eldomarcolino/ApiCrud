@@ -39,7 +39,10 @@ namespace SistemaDeRecarga.Controllers
         {
             try
             {
-                var balance = await _balanceBusiness.AddBalanceAsync(request.IdUser, request.Amount);
+                var balance = await _balanceBusiness.AddBalanceAsync(
+                    request.IdUser,
+                    request.Amount,
+                    request.Description);
 
                 var successResponse = new
                 {
@@ -61,7 +64,10 @@ namespace SistemaDeRecarga.Controllers
         {
             try
             {
-                var balance = await _balanceBusiness.DeductBalanceAsync(request.IdUser, request.Amount);
+                var balance = await _balanceBusiness.DeductBalanceAsync(
+                    request.IdUser,
+                    request.Amount,
+                    request.Description);
 
                 var successResponse = new
                 {

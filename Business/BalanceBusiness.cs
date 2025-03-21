@@ -77,6 +77,8 @@ namespace SistemaDeRecarga.Business
                 transacao.Id = lastId + 1;
             }
 
+            await _transacaoRepository.CreateTransacaoAsync(transacao);
+
             return balance;
         }
 
@@ -117,6 +119,8 @@ namespace SistemaDeRecarga.Business
                 int lastId = await _transacaoRepository.GetLastIdAsync();
                 transacao.Id = lastId + 1;
             }
+
+            await _transacaoRepository.CreateTransacaoAsync(transacao);
 
             return saldo;
         }

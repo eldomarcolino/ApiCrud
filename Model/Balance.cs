@@ -26,5 +26,6 @@ namespace SistemaDeRecarga.Model
     {
         public int IdUser { set; get; }
         public decimal Amount { get; set; }
+        public string Description { get; set; }
     }
 }
