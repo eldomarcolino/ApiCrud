@@ -15,7 +15,10 @@ namespace SistemaDeRecarga.Model
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Type { get; set; } // "Recarga" ou "Débido"
+        public decimal Valor { get; set; }
+
+        [Required]
+        public string Type { get; set; } // "Recarga" ou "Débido"
 
         [MaxLength(255)]
         public string Description { get; set; }

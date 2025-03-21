@@ -6,12 +6,17 @@ namespace SistemaDeRecarga.Business
     public class BalanceBusiness : IBalanceBusiness
     {
         private readonly IBalanceRepository _balanceRepository;
+        private readonly ITransacaoRepository _transacaoRepository;
         private readonly IUserRepository _userRepository;
 
-        public BalanceBusiness(IBalanceRepository balanceRepository, IUserRepository userRepository)
+        public BalanceBusiness(
+            IBalanceRepository balanceRepository,
+            IUserRepository userRepository,
+            ITransacaoRepository transacaoRepository)
         {
             _balanceRepository = balanceRepository;
             _userRepository = userRepository;
+            _transacaoRepository = transacaoRepository;
         }
 
         public async Task<Balance> GetBalanceByIdUserAsync(int idUser)
@@ -40,7 +45,7 @@ namespace SistemaDeRecarga.Business
             return balance;
         }
 
-        public async Task<Balance> AddBalanceAsync(int idUser, decimal valor)
+        public async Task<Balance> AddBalanceAsync(int idUser, decimal valor, string description)
         {
             if(valor <= 0)
             {
@@ -55,10 +60,27 @@ namespace SistemaDeRecarga.Business
             balance.LastUpdate = DateTime.Now;
             await _balanceRepository.UpdateBalanceAsync(balance);
 
+            //Registrar transaçao
+            var transacao = new Transacao
+            {
+                IdUser = idUser,
+                Valor = valor,
+                Type = "Recarga",
+                Description = description,
+                TransactionDate = DateTime.Now
+            };
+
+            // Gerar novo ID se necessário
+            if (transacao.Id == 0)
+            {
+                int lastId = await _transacaoRepository.GetLastIdAsync();
+                transacao.Id = lastId + 1;
+            }
+
             return balance;
         }
 
-        public async Task<Balance> DeductBalanceAsync(int idUser, decimal valor)
+        public async Task<Balance> DeductBalanceAsync(int idUser, decimal valor, string description)
         {
             if(valor <= 0)
             {
@@ -78,6 +100,23 @@ namespace SistemaDeRecarga.Business
             saldo.Amount -= valor;
             saldo.LastUpdate = DateTime.Now;
             await _balanceRepository.UpdateBalanceAsync(saldo);
+
+            //Registrar transaçao
+            var transacao = new Transacao
+            {
+                IdUser = idUser,
+                Valor = valor,
+                Type = "Recarga",
+                Description = description,
+                TransactionDate = DateTime.Now
+            };
+
+            // Gerar novo ID se necessário
+            if (transacao.Id == 0)
+            {
+                int lastId = await _transacaoRepository.GetLastIdAsync();
+                transacao.Id = lastId + 1;
+            }
 
             return saldo;
         }

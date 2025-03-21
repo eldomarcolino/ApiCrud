@@ -54,6 +54,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserBusiness, UserBusiness>();
 builder.Services.AddScoped<IBalanceRepository, BalanceRepository>();
 builder.Services.AddScoped<IBalanceBusiness, BalanceBusiness>();
+builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+builder.Services.AddScoped<ITransacaoBusiness, TransacaoBusiness>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

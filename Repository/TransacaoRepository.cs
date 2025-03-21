@@ -21,7 +21,7 @@ namespace SistemaDeRecarga.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Transacao>> GetAllTransacaoByIdUserAsync(int idUser)
+        public async Task<IEnumerable<Transacao>> GetTransacaoByIdUserAsync(int idUser)
         {
             return await _context.Transaction
                 .Where(t => t.IdUser == idUser)
