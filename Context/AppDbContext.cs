@@ -11,7 +11,7 @@ namespace SistemaDeRecarga.Context
         public DbSet<Curso> Curso { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Balance> Balance { get; set; }
-        public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<Transacao> Transaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace SistemaDeRecarga.Context
                 .WithOne(b => b.Balance)
                 .HasForeignKey<Balance>(b => b.IdUser);
 
-            modelBuilder.Entity<Transaction>() // Configuraçao para Transiçao
+            modelBuilder.Entity<Transacao>() // Configuraçao para Transiçao
                 .HasOne(t => t.User)
                 .WithMany(u => u.Transaction)
                 .HasForeignKey(t => t.IdUser);

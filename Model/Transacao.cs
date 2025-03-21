@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace SistemaDeRecarga.Model
 {
     [Table("Transaction")]
-    public class Transaction
+    public class Transacao
     {
         [Key]
         public int Id { get; set; }
