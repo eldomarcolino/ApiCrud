@@ -5,7 +5,7 @@ using System.Transactions;
 
 namespace SistemaDeRecarga.Repository
 {
-    public class TransacaoRepository
+    public class TransacaoRepository : ITransacaoRepository
     {
         private readonly AppDbContext _context;
 
